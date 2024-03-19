@@ -55,7 +55,6 @@ function mergeSort(array) {
 			for (let i = 0; i < leftLeftPart; i++) {
 				leftLeftPartArray.push(array[i]);
 			}
-
 			for (let i = leftLeftPart; i < leftRightPart; i++) {
 				leftRightPartArray.push(array[i]);
 			}
