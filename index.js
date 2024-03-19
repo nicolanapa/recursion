@@ -34,7 +34,7 @@ console.log(array);
 function mergeSort(array) {
 	console.log(array);
 	let media = array.length / 2;
-	if (media >= 2) {
+	if (media >= 1) {
 		let left = [];
 		let right = [];
 		for (let i = 0; i < media; i++) {
@@ -47,7 +47,9 @@ function mergeSort(array) {
 
 		let media2 = media / 2;
 
-		if (media2 >= 2) {
+		if (media2 >= 1) {
+			return mergeSort(left), mergeSort(right);
+			/*	
 			let leftLeftPart = media2; // Left
 			let leftRightPart = media2 * 2; // Left
 			let leftLeftPartArray = [];
@@ -63,6 +65,35 @@ function mergeSort(array) {
 			if (leftLeftPart >= 2 && leftRightPart >= 2) {
 				return mergeSort(leftLeftPartArray), mergeSort(leftRightPart);
 			}
+			*/
+		} else {
+			if (left.length === 1) {
+				for (let i = 0; i < left.length; i++) {
+					/*if (left[i] >= left[i + 1]) {
+						let temp = left[i + 1];
+						left[i + 1] = left[i];
+						left[i] = temp;
+					}*/
+					if (left >= right) {
+						let temp = left;
+						left = right;
+						right = temp;
+					}
+					// No Else needed === Already sorted
+				}
+				console.log("Left sorted:", left, "Right sorted:", right);
+			}
+			/*if (right.length === 1) {
+				for (let i = 0; i < right.length; i++) {
+					if (right[i] >= right[i + 1]) {
+						let temp = right[i + 1];
+						right[i + 1] = right[i];
+						right[i] = temp;
+					}
+					// Else === Already sorted
+				}
+				console.log("Right sorted: " + right);
+			}*/
 		}
 	}
 }
