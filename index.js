@@ -48,6 +48,12 @@ function mergeSort(array) {
 		let media2 = media / 2;
 
 		if (media2 >= 1) {
+			// save a temporary left / right array (with push) before another division
+			// save also original array
+
+			// or create an array and push the sorted values in it, example:
+			// when left finishes create a leftArray which sorts the array and viceversa
+			// and a final array which merges left and right sorted values
 			return mergeSort(left), mergeSort(right);
 			/*	
 			let leftLeftPart = media2; // Left
@@ -67,21 +73,26 @@ function mergeSort(array) {
 			}
 			*/
 		} else {
-			if (left.length === 1) {
-				for (let i = 0; i < left.length; i++) {
-					/*if (left[i] >= left[i + 1]) {
+			if (left.length === 1 && right.length === 1) {
+				/*for (let i = 0; i < left.length; i++) {
+					if (left[i] >= left[i + 1]) {
 						let temp = left[i + 1];
 						left[i + 1] = left[i];
 						left[i] = temp;
-					}*/
-					if (left >= right) {
-						let temp = left;
-						left = right;
-						right = temp;
-					}
-					// No Else needed === Already sorted
+					}}*/
+				if (left >= right) {
+					let temp = left;
+					left = right;
+					right = temp;
 				}
+				// No Else needed === Already sorted
+
 				console.log("Left sorted:", left, "Right sorted:", right);
+				
+				let part = [];
+				for (let i = 0; i < (left.length + right.length); i++) {
+					// blocked here
+				}
 			}
 			/*if (right.length === 1) {
 				for (let i = 0; i < right.length; i++) {
@@ -99,4 +110,5 @@ function mergeSort(array) {
 }
 
 console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
-//console.log(mergeSort([105, 79, 100, 110]));
+/*console.log("ANOTHER MERGE SORT");
+console.log(mergeSort([105, 79, 100, 110]));*/
