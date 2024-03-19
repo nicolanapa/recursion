@@ -88,9 +88,9 @@ function mergeSort(array) {
 				// No Else needed === Already sorted
 
 				console.log("Left sorted:", left, "Right sorted:", right);
-				
+
 				let part = [];
-				for (let i = 0; i < (left.length + right.length); i++) {
+				for (let i = 0; i < left.length + right.length; i++) {
 					// blocked here
 				}
 			}
