@@ -31,10 +31,12 @@ console.log(array);
 
 // PROJECT MERGE SORT
 
-function mergeSort(array) {
-	console.log(array);
+function mergeSort(array, toMerge) {
+	console.log();
+	console.log("TRUE, TO MERGE:", array);
+	let resorted = false;
 	let media = array.length / 2;
-	if (media >= 1) {
+	if (media >= 1 && toMerge) {
 		let left = [];
 		let right = [];
 		for (let i = 0; i < media; i++) {
@@ -54,7 +56,7 @@ function mergeSort(array) {
 			// or create an array and push the sorted values in it, example:
 			// when left finishes create a leftArray which sorts the array and viceversa
 			// and a final array which merges left and right sorted values
-			return mergeSort(left), mergeSort(right);
+			return mergeSort(left, true).concat(mergeSort(right, true));
 			/*	
 			let leftLeftPart = media2; // Left
 			let leftRightPart = media2 * 2; // Left
@@ -88,11 +90,13 @@ function mergeSort(array) {
 				// No Else needed === Already sorted
 
 				console.log("Left sorted:", left, "Right sorted:", right);
+				return mergeSort(left.concat(right), false)/*, resorted = true*/;
 
+				/*
 				let part = [];
 				for (let i = 0; i < left.length + right.length; i++) {
 					// blocked here
-				}
+				}*/
 			}
 			/*if (right.length === 1) {
 				for (let i = 0; i < right.length; i++) {
@@ -106,9 +110,36 @@ function mergeSort(array) {
 				console.log("Right sorted: " + right);
 			}*/
 		}
+	} else if (!toMerge) {
+		console.log();
+		console.log("FALSE, ALREADY MERGED:", array);
+		return array;
 	}
+	/*if (resorted) {
+		let bigger = false;
+		let mergedArray = [];
+		for (let i = 0; i < left.length + right.length; i++) {
+				for (let i2 = 0; i < left.length + right.length; i++) {
+					if (left[i] === right[i]) {
+						i2 = left.length + right.length;
+						mergedArray.push(left[i]);
+					} else if (left[i] > right[i]) {
+						i2 = i;
+						mergedArray.push(right[i]);
+					} else if (left[i] < right[i]) {
+						i2 = left.length + right.length;
+						mergedArray.push(left[i]);
+					}
+				}
+		}
+		console.log("merged");
+		console.log(left, right);
+		console.log(mergedArray);
+		resorted = false;
+		return mergedArray;
+	}*/
 }
 
-console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
+console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1], true));
 /*console.log("ANOTHER MERGE SORT");
 console.log(mergeSort([105, 79, 100, 110]));*/
