@@ -90,7 +90,7 @@ function mergeSort(array, toMerge) {
 				// No Else needed === Already sorted
 
 				console.log("Left sorted:", left, "Right sorted:", right);
-				return mergeSort(left.concat(right), false)/*, resorted = true*/;
+				return mergeSort(left.concat(right), false) /*, resorted = true*/;
 
 				/*
 				let part = [];
@@ -140,6 +140,162 @@ function mergeSort(array, toMerge) {
 	}*/
 }
 
-console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1], true));
+console.log(sortArray(mergeSort([3, 2, 1, 13, 8, 5, 0, 1], true)));
 /*console.log("ANOTHER MERGE SORT");
-console.log(mergeSort([105, 79, 100, 110]));*/
+console.log(sortArray(mergeSort([105, 79, 100, 110])));*/
+
+function sortArray(array) {
+	console.log();
+	console.log();
+	console.log("TO BE SORTED:", array);
+
+	if (array.length / 2 >= 2) {
+		let media;
+		if (array.length / 2 / 2 >= 2) {
+			media = array.length / 2 / 2;
+		} else {
+			media = array.length / 2;
+		}
+		// LEFT
+		let leftArray = [];
+		let rightArray = [];
+
+		for (let i = 0; i < media; i++) {
+			if (array[i] > array[i + media]) {
+				leftArray.push(array[i + media]);
+				for (let i2 = i; i2 < media; i2++) {
+					if (array[i] > array[i + media + 1]) {
+						leftArray.push(array[i + media]);
+					} else {
+						leftArray.push(array[i2]);
+
+						i2 = media;
+					}
+				}
+			} else if (array[i] < array[i + media]) {
+				leftArray.push(array[i]);
+			} else if (array[i] === array[i + media]) {
+				leftArray.push(array[i]);
+				leftArray.push(array[i]);
+			}
+
+			if (i + 1 === media) {
+				for (let i3 = 0; i3 < media; i3++) {
+					if (!leftArray.includes(array[i3], 0)) {
+						leftArray.push(array[i3]);
+					} else if (!leftArray.includes(array[i3 + media], 0)) {
+						leftArray.push(array[i3 + media]);
+					}
+				}
+			}
+		}
+
+		//for (let i = 0; i < media; i++) {
+		/*if (array[i] > array[i + media]) {
+				let temp = array[i];
+
+				leftArray.push(array[i + media]);
+
+				for (let i2 = 0; i2 < media; i2++) {
+					if (temp < array[i2 + media]) {
+						leftArray.push(temp);
+
+						i2 = media;
+					}
+				}
+			} else if (array[i] < array[i + media]) {
+				leftArray.push(array[i]);
+
+				let temp = array[i + media];
+
+				for (let i2 = media; i2 < media + i; i2++) {
+					if (temp < array[i2 - media]) {
+						leftArray.push(array[i2 - media]);
+
+						i2 = media + i;
+					}
+				}
+			} else if (array[i] === array[i + media]) {
+				leftArray.push(array[i]);
+				leftArray.push(array[i + media]);
+			}
+
+			if (leftArray.length + 1 === array.length / 2) {
+				leftArray.push(array[i + media]);
+
+				i = media;
+			}*/
+		//}
+
+		console.log(leftArray);
+
+		// RIGHT
+		for (let i = array.length / 2; i < array.length - media; i++) {
+			if (array[i] > array[i + media]) {
+				rightArray.push(array[i + media]);
+				for (let i2 = i; i2 < media; i2++) {
+					if (array[i] > array[i + media + 1]) {
+						rightArray.push(array[i + media]);
+					} else {
+						rightArray.push(array[i2]);
+
+						i2 = media;
+					}
+				}
+			} else if (array[i] < array[i + media]) {
+				rightArray.push(array[i]);
+			} else if (array[i] === array[i + media]) {
+				rightArray.push(array[i]);
+				rightArray.push(array[i]);
+			}
+
+			if (i + 1 === array.length - media) {
+				for (let i3 = array.length / 2; i3 < array.length - media; i3++) {
+					if (!rightArray.includes(array[i3], array.length / 2)) {
+						rightArray.push(array[i3]);
+					} else if (!rightArray.includes(array[i3 + media], array.length / 2)) {
+						rightArray.push(array[i3 + media]);
+					}
+				}
+			}
+		}
+		/*for (let i = array.length / 2; i < array.length; i++) {
+			if (array[i] > array[i + media]) {
+				let temp = array[i];
+
+				rightArray.push(array[i + media]);
+
+				for (let i2 = 0; i2 < media; i2++) {
+					if (temp < array[i2 + media]) {
+						rightArray.push(temp);
+
+						i2 = media;
+					}
+				}
+			} else if (array[i] < array[i + media]) {
+				rightArray.push(array[i]);
+
+				let temp = array[i + media];
+
+				for (let i2 = media; i2 < media + i; i2++) {
+					if (temp < array[i2 - media]) {
+						rightArray.push(array[i2 - media]);
+
+						i2 = media + i;
+					}
+				}
+			} else if (array[i] === array[i + media]) {
+				rightArray.push(array[i]);
+				rightArray.push(array[i + media]);
+			}
+
+			if (rightArray.length + 1 === array.length / 2) {
+				rightArray.push(array[i + media]);
+
+				i = media;
+			}
+		}*/
+
+		console.log(rightArray);
+	}
+}
