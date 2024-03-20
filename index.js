@@ -140,58 +140,52 @@ function mergeSort(array, toMerge) {
 	}*/
 }
 
-console.log(sortArray(mergeSort([3, 2, 1, 13, 8, 5, 0, 1], true)));
-/*console.log("ANOTHER MERGE SORT");
-console.log(sortArray(mergeSort([105, 79, 100, 110])));*/
-
 function sortArray(array) {
 	console.log();
 	console.log();
 	console.log("TO BE SORTED:", array);
 
-	if (array.length / 2 >= 2) {
-		let media;
-		if (array.length / 2 / 2 >= 2) {
-			media = array.length / 2 / 2;
-		} else {
-			media = array.length / 2;
-		}
-		// LEFT
-		let leftArray = [];
-		let rightArray = [];
+	let media = array.length / 2;
+	while (media / 2 >= 2) {
+		media = media / 2;
+	}
 
-		for (let i = 0; i < media; i++) {
-			if (array[i] > array[i + media]) {
-				leftArray.push(array[i + media]);
-				for (let i2 = i; i2 < media; i2++) {
-					if (array[i] > array[i + media + 1]) {
-						leftArray.push(array[i + media]);
-					} else {
-						leftArray.push(array[i2]);
+	let leftArray = [];
+	let rightArray = [];
 
-						i2 = media;
-					}
+	// LEFT
+	for (let i = 0; i < media; i++) {
+		if (array[i] > array[i + media]) {
+			leftArray.push(array[i + media]);
+			for (let i2 = i; i2 < media; i2++) {
+				if (array[i] > array[i + media + 1]) {
+					leftArray.push(array[i + media]);
+				} else {
+					leftArray.push(array[i2]);
+
+					i2 = media;
 				}
-			} else if (array[i] < array[i + media]) {
-				leftArray.push(array[i]);
-			} else if (array[i] === array[i + media]) {
-				leftArray.push(array[i]);
-				leftArray.push(array[i]);
 			}
+		} else if (array[i] < array[i + media]) {
+			leftArray.push(array[i]);
+		} else if (array[i] === array[i + media]) {
+			leftArray.push(array[i]);
+			leftArray.push(array[i]);
+		}
 
-			if (i + 1 === media) {
-				for (let i3 = 0; i3 < media; i3++) {
-					if (!leftArray.includes(array[i3], 0)) {
-						leftArray.push(array[i3]);
-					} else if (!leftArray.includes(array[i3 + media], 0)) {
-						leftArray.push(array[i3 + media]);
-					}
+		if (i + 1 === media) {
+			for (let i3 = 0; i3 < media; i3++) {
+				if (!leftArray.includes(array[i3], 0)) {
+					leftArray.push(array[i3]);
+				} else if (!leftArray.includes(array[i3 + media], 0)) {
+					leftArray.push(array[i3 + media]);
 				}
 			}
 		}
+	}
 
-		//for (let i = 0; i < media; i++) {
-		/*if (array[i] > array[i + media]) {
+	//for (let i = 0; i < media; i++) {
+	/*if (array[i] > array[i + media]) {
 				let temp = array[i];
 
 				leftArray.push(array[i + media]);
@@ -225,41 +219,39 @@ function sortArray(array) {
 
 				i = media;
 			}*/
-		//}
+	//}
 
-		console.log(leftArray);
+	// RIGHT
+	for (let i = array.length / 2; i < array.length - media; i++) {
+		if (array[i] > array[i + media]) {
+			rightArray.push(array[i + media]);
+			for (let i2 = i; i2 < media; i2++) {
+				if (array[i] > array[i + media + 1]) {
+					rightArray.push(array[i + media]);
+				} else {
+					rightArray.push(array[i2]);
 
-		// RIGHT
-		for (let i = array.length / 2; i < array.length - media; i++) {
-			if (array[i] > array[i + media]) {
-				rightArray.push(array[i + media]);
-				for (let i2 = i; i2 < media; i2++) {
-					if (array[i] > array[i + media + 1]) {
-						rightArray.push(array[i + media]);
-					} else {
-						rightArray.push(array[i2]);
-
-						i2 = media;
-					}
+					i2 = media;
 				}
-			} else if (array[i] < array[i + media]) {
-				rightArray.push(array[i]);
-			} else if (array[i] === array[i + media]) {
-				rightArray.push(array[i]);
-				rightArray.push(array[i]);
 			}
+		} else if (array[i] < array[i + media]) {
+			rightArray.push(array[i]);
+		} else if (array[i] === array[i + media]) {
+			rightArray.push(array[i]);
+			rightArray.push(array[i]);
+		}
 
-			if (i + 1 === array.length - media) {
-				for (let i3 = array.length / 2; i3 < array.length - media; i3++) {
-					if (!rightArray.includes(array[i3], array.length / 2)) {
-						rightArray.push(array[i3]);
-					} else if (!rightArray.includes(array[i3 + media], array.length / 2)) {
-						rightArray.push(array[i3 + media]);
-					}
+		if (i + 1 === array.length - media) {
+			for (let i3 = array.length / 2; i3 < array.length - media; i3++) {
+				if (!rightArray.includes(array[i3], array.length / 2)) {
+					rightArray.push(array[i3]);
+				} else if (!rightArray.includes(array[i3 + media], array.length / 2)) {
+					rightArray.push(array[i3 + media]);
 				}
 			}
 		}
-		/*for (let i = array.length / 2; i < array.length; i++) {
+	}
+	/*for (let i = array.length / 2; i < array.length; i++) {
 			if (array[i] > array[i + media]) {
 				let temp = array[i];
 
@@ -296,6 +288,47 @@ function sortArray(array) {
 			}
 		}*/
 
-		console.log(rightArray);
+	console.log(leftArray, rightArray);
+
+	media *= 2;
+	let newArray = [];
+	// FINAL SORTING
+	for (let i = 0; i < array.length / 2; i++) {
+		if (leftArray[i] > rightArray[i]) {
+			newArray.push(rightArray[i]);
+			for (let i2 = i; i2 < media; i2++) {
+				if (leftArray[i2] > rightArray[i + 1]) {
+					newArray.push(rightArray[i]);
+				} else {
+					newArray.push(leftArray[i2]);
+
+					i2 = media;
+				}
+			}
+		} else if (leftArray[i] < rightArray[i]) {
+			newArray.push(array[i]);
+		} else if (leftArray[i] === rightArray[i]) {
+			newArray.push(leftArray[i]);
+			newArray.push(leftArray[i]);
+
+			i += 1;
+		}
+
+		if (i + 1 === array.length / 2) {
+			for (let i3 = 0; i3 < array.length / 2; i3++) {
+				if (!newArray.includes(leftArray[i3])) {
+					newArray.push(leftArray[i3]);
+				}
+				if (!newArray.includes(rightArray[i3])) {
+					newArray.push(rightArray[i3]);
+				}
+			}
+		}
 	}
+
+	return newArray;
 }
+
+console.log(sortArray(mergeSort([3, 2, 1, 13, 8, 5, 0, 1], true)));
+//console.log("ANOTHER MERGE SORT");
+//console.log(sortArray(mergeSort([105, 79, 100, 110], true)));
