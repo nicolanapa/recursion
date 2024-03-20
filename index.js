@@ -296,22 +296,22 @@ function sortArray(array) {
 	for (let i = 0; i < array.length / 2; i++) {
 		if (leftArray[i] > rightArray[i]) {
 			newArray.push(rightArray[i]);
-			for (let i2 = i; i2 < media; i2++) {
-				if (leftArray[i2] > rightArray[i + 1]) {
-					newArray.push(rightArray[i]);
+			for (let i2 = i; i2 < array.length / 2; i2++) {
+				if (leftArray[i] > rightArray[i2 + 1]) {
+					newArray.push(rightArray[i2 + 1]);
 				} else {
 					newArray.push(leftArray[i2]);
 
-					i2 = media;
+					i2 = array.length / 2;
 				}
 			}
 		} else if (leftArray[i] < rightArray[i]) {
-			newArray.push(array[i]);
+			newArray.push(leftArray[i]);
 		} else if (leftArray[i] === rightArray[i]) {
 			newArray.push(leftArray[i]);
 			newArray.push(leftArray[i]);
 
-			i += 1;
+			// i += 1;
 		}
 
 		if (i + 1 === array.length / 2) {
